@@ -3,73 +3,134 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>شام ويب – قريباً!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <title>شام ويب - قريباً</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p1Cm4FSnF7vZt5PK09FLhxfnOZ9WYqk64LVY3mj+epHvBFvR0gqW3A1uqA8E6BFyp64O7ehsLBmT3dnE7xrpGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-      background: #f7f9fc;
-      color: #222;
+    * {
       margin: 0;
       padding: 0;
-      text-align: center;
-    }
-    .container {
-      max-width: 600px;
-      margin: 80px auto;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 2.5em;
-      color: #3b82f6;
-    }
-    p {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-    }
-    input, button {
-      padding: 12px;
-      margin: 5px 0;
-      font-size: 1em;
-      width: 100%;
-      max-width: 100%;
       box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
     }
-    input {
-      border: 1px solid #ccc;
-      border-radius: 8px;
+
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
     }
-    button {
-      background-color: #3b82f6;
-      color: white;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .countdown {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    form {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
       border: none;
       border-radius: 8px;
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffcc00;
+      color: #000;
+      font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: 0.3s;
     }
+
     button:hover {
-      background-color: #2563eb;
+      background-color: #ffc107;
     }
-    .footer {
+
+    .social-icons {
+      margin-top: 30px;
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+      color: #fff;
+      font-size: 1.8rem;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ffcc00;
+    }
+
+    footer {
       margin-top: 40px;
-      font-size: 0.9em;
-      color: #888;
+      font-size: 0.9rem;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🚀 شام ويب قادمة!</h1>
-    <p>سجّل لتكون أول من يحصل على عروض الإطلاق الحصرية 🎁</p>
-    <form name="early-access" netlify>
-      <input type="text" name="name" placeholder="الاسم الكامل" required />
-      <input type="email" name="email" placeholder="البريد الإلكتروني" required />
-      <input type="tel" name="phone" placeholder="رقم الهاتف" required />
-      <button type="submit">سجّل الآن</button>
-    </form>
-    <div class="footer">
-      © 2025 شام ويب – جميع الحقوق محفوظة
-    </div>
+  <h1>🚀 شام ويب قادمة قريبًا!</h1>
+  <p>سجّل الآن لتحصل على أولوية الوصول إلى العروض والتجربة الجديدة كليًا!</p>
+
+  <div class="countdown" id="countdown">
+    جاري التحميل...
   </div>
+
+  <form name="signup" method="POST" data-netlify="true">
+    <input type="text" name="name" placeholder="الاسم الكامل" required />
+    <input type="email" name="email" placeholder="البريد الإلكتروني" required />
+    <input type="text" name="phone" placeholder="رقم الهاتف" required />
+    <button type="submit">سجّل الآن</button>
+  </form>
+
+  <div class="social-icons">
+    <a href="https://facebook.com/shamwebs" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://instagram.com/shamwebs" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://t.me/shamwebs" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+    <a href="mailto:info@shamwebs.com"><i class="fas fa-envelope"></i></a>
+  </div>
+
+  <footer>© 2025 ShamWebs.com</footer>
+
+  <script>
+    // تحديد وقت الإطلاق بعد 60 يوم من الآن
+    const now = new Date();
+    const launchDate = new Date(now.getTime() + 60 * 24 * 60 * 60 * 1000); // +60 يوم
+
+    const timer = setInterval(() => {
+      const currentTime = new Date().getTime();
+      const distance = launchDate.getTime() - currentTime;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML = `${days} يوم : ${hours} ساعة : ${minutes} دقيقة : ${seconds} ثانية`;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "🎉 تم الإطلاق!";
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
