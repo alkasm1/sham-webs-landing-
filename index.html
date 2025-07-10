@@ -1,153 +1,142 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>شام ويب | قادمون بقوة!</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sham Webs – قادمون</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-   <div style="margin-top: 30px;">
-  <a href="https://api.whatsapp.com/send?text=منصة%20شام%20ويب%20قادمة!%20🔥%20سجّل%20الآن%20عبر%20%0Ahttps%3A%2F%2Fshamwebs.com"
-     target="_blank"
-     style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 1em;">
-    <i class="fab fa-whatsapp"></i> شارك على واتساب
-  </a>
-</div> 
     body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      background-color: #000;
       color: #fff;
-      margin: 0;
-      padding: 0;
+      font-family: 'Arial', sans-serif;
       text-align: center;
-    }
-
-    header {
-      padding: 40px 20px 10px;
+      padding: 40px 20px;
     }
 
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
+      font-size: 3em;
+      margin: 0.2em 0;
+      text-shadow: 2px 2px 5px #333;
     }
 
-    p {
-      font-size: 1.2em;
-      color: #ccc;
+    .logo {
+      margin-bottom: 20px;
     }
 
     .countdown {
       font-size: 2em;
       margin: 30px 0;
+      color: #0f0;
     }
 
-    .form-section {
-      margin: 30px auto;
-      max-width: 400px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 12px;
+    form {
+      margin-top: 20px;
     }
 
-    input[type="text"], input[type="email"] {
-      width: 90%;
-      padding: 12px;
-      margin: 10px 0;
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 250px;
+      max-width: 90%;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
     }
 
     button {
-      padding: 12px 30px;
-      background: #ff9800;
-      color: #fff;
+      padding: 12px 24px;
+      background-color: #e91e63;
       border: none;
-      border-radius: 8px;
-      font-size: 1em;
+      border-radius: 6px;
+      color: white;
       cursor: pointer;
+      font-size: 1em;
     }
 
     .social-icons {
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .social-icons a {
+      color: white;
       margin: 0 10px;
-      color: #fff;
-      font-size: 1.5em;
-      transition: color 0.3s ease;
+      font-size: 1.8em;
+      transition: 0.3s;
     }
 
     .social-icons a:hover {
-      color: #ff9800;
+      color: #e91e63;
     }
 
-    footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #aaa;
+    .whatsapp-share {
+      margin-top: 30px;
     }
 
-    @media(max-width: 500px) {
-      h1 { font-size: 2em; }
-      .countdown { font-size: 1.5em; }
+    .whatsapp-share a {
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1em;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>🚀 منصة "شام ويب" قادمة!</h1>
-    <p>سجّل الآن لتحصل على أولوية الوصول للعروض والمزايا الأولى 🔥</p>
-  </header>
-
-  <div class="countdown" id="countdown">
-    جاري التحميل...
+  <div class="logo">
+    <img src="https://alkasm1.github.io/sham-webs-landing-/logo.png" alt="SHAM WEBS" style="max-width: 300px;">
   </div>
 
-  <div class="form-section">
-    <form>
-      <input type="text" placeholder="رقم الهاتف" required /><br />
-      <input type="email" placeholder="البريد الإلكتروني" required /><br />
-      <button type="submit">سجّل الآن</button>
-    </form>
+  <h1>قريبًا... منصة شام ويب 🔥</h1>
+  <p>سجّل لتكون أول من يصلك الجديد 🎁</p>
+
+  <div class="countdown" id="countdown"></div>
+
+  <form>
+    <input type="email" placeholder="البريد الإلكتروني" required><br>
+    <input type="tel" placeholder="رقم الهاتف" required><br>
+    <button type="submit">سجّل الآن</button>
+  </form>
+
+  <div class="whatsapp-share">
+    <a href="https://api.whatsapp.com/send?text=منصة%20شام%20ويب%20قادمة!%20🔥%20سجّل%20الآن%20عبر%20%0Ahttps%3A%2F%2Falkasm1.github.io%2Fsham-webs-landing-" target="_blank">
+      <i class="fab fa-whatsapp"></i> شارك على واتساب
+    </a>
   </div>
 
   <div class="social-icons">
-    <a href="https://facebook.com/shamwebs" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://t.me/shamweb" target="_blank"><i class="fab fa-telegram-plane"></i></a>
-    <a href="https://instagram.com/shamweb" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="mailto:info@shamwebs.com"><i class="fas fa-envelope"></i></a>
+    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://wa.me" target="_blank"><i class="fab fa-whatsapp"></i></a>
   </div>
 
-  <footer>
-    <p>© 2025 shamwebs.com - جميع الحقوق محفوظة</p>
-  </footer>
-
   <script>
-    // 60 يوم من الآن
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 60);
+    // عداد تنازلي يبدأ من 60 يومًا
+    const countdownEl = document.getElementById("countdown");
+    const launchDate = new Date();
+    launchDate.setDate(launchDate.getDate() + 60);
 
     function updateCountdown() {
       const now = new Date().getTime();
-      const distance = targetDate - now;
+      const distance = launchDate - now;
+
+      if (distance < 0) {
+        countdownEl.innerHTML = "انطلقت المنصة!";
+        return;
+      }
 
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      document.getElementById("countdown").innerHTML =
-        `${days} يوم / ${hours} ساعة / ${minutes} دقيقة / ${seconds} ثانية`;
-
-      if (distance < 0) {
-        document.getElementById("countdown").innerHTML = "انطلقت المنصة!";
-      }
+      countdownEl.innerHTML = `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
     }
 
-    setInterval(updateCountdown, 1000);
     updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 
 </body>
