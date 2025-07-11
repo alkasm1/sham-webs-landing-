@@ -1,128 +1,68 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>منصة شام ويب</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Cairo', sans-serif;
       text-align: center;
-      background-color: #f8f9fa;
-      margin: 0;
-      padding: 2rem;
+      padding: 20px;
+      background: #f0f0f0;
+      direction: rtl;
     }
-    h1 {
-      color: #333;
-    }
-    p {
-      font-size: 1.1rem;
-      color: #555;
-    }
-    form {
-      margin-top: 2rem;
-    }
+    h1 { color: #2c3e50; }
     input, button {
-      padding: 0.8rem;
-      margin: 0.5rem;
-      width: 80%;
-      max-width: 300px;
-      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      font-size: 1rem;
       border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 80%;
+      max-width: 400px;
     }
     button {
-      background-color: #28a745;
+      background: #28a745;
       color: white;
       border: none;
       cursor: pointer;
     }
-    button:hover {
-      background-color: #218838;
-    }
-    #msg {
-      margin-top: 1rem;
+    .success {
       color: green;
-    }
-    .countdown {
-      font-size: 2rem;
-      margin: 1.5rem 0;
-      color: #dc3545;
-    }
-    .social {
-      margin-top: 2rem;
-    }
-    .social a {
-      margin: 0 10px;
-      font-size: 1.5rem;
-      color: #333;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
 
-  <h1>🚀 منصة شام ويب قادمة قريبًا!</h1>
-  <p>سجّل بياناتك للحصول على عروض الإطلاق الأولى 🔥</p>
+  <h1>🚀 منصة شام ويب</h1>
+  <p>سجّل الآن لتكون من أوائل من يحصلون على عروضنا 💥</p>
 
-  <div class="countdown" id="countdown"></div>
-
-  <form name="submit-to-google-sheet">
+  <form id="shamForm">
     <input type="text" name="name" placeholder="الاسم" required />
     <input type="email" name="email" placeholder="البريد الإلكتروني" required />
     <input type="tel" name="phone" placeholder="رقم الهاتف" required />
     <button type="submit">سجّل الآن</button>
-    <div id="msg"></div>
   </form>
 
-  <div class="social">
-    <a href="https://wa.me/yourwhatsapplink" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://facebook.com/shamwebs" target="_blank"><i class="fab fa-facebook"></i></a>
-    <a href="https://t.me/yourchannel" target="_blank"><i class="fab fa-telegram"></i></a>
-  </div>
+  <div id="successMessage" class="success" style="display:none;">✅ تم الإرسال بنجاح! شكرًا لتسجيلك.</div>
 
   <script>
-    // Google Sheets form submission
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxexvzsiVEU7m0x8ye8V0TJNnb2SK-ppwPYWNAvJcbBp6e6TolO2nkJ3IwTJeFEVKh0Og/exec';
-    const form = document.forms['submit-to-google-sheet'];
-    const msg = document.getElementById('msg');
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxexvzsiVEU7m0x8ye8V0TJNnb2SK-ppwPYWNAvJcbBp6e6TolO2nkJ3IwTJeFEVKh0Og/exec";
+    const form = document.getElementById('shamForm');
+    const successMessage = document.getElementById('successMessage');
 
     form.addEventListener('submit', e => {
-      e.preventDefault();
-      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+      e.preventDefault(); // منع إعادة تحميل الصفحة
+      const formData = new FormData(form);
+      fetch(scriptURL, { method: 'POST', body: formData })
         .then(response => {
-          msg.innerHTML = "✅ تم الإرسال بنجاح";
-          setTimeout(() => msg.innerHTML = "", 5000);
+          successMessage.style.display = 'block';
           form.reset();
         })
-        .catch(error => {
-          msg.innerHTML = "❌ حدث خطأ أثناء الإرسال";
-          console.error('Error!', error.message);
-        });
+        .catch(error => alert('❌ حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقًا.'));
     });
-
-    // Countdown logic
-    const countdown = document.getElementById("countdown");
-    const launchDate = new Date();
-    launchDate.setDate(launchDate.getDate() + 60);
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdown.innerHTML = `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
-
-      if (distance < 0) {
-        clearInterval(timer);
-        countdown.innerHTML = "✨ تم الإطلاق!";
-      }
-    }
-
-    const timer = setInterval(updateCountdown, 1000);
   </script>
 
 </body>
