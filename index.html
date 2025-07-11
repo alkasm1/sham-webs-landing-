@@ -1,124 +1,58 @@
-<!DOCTYPE html><html lang="ar">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منصة شام ويب</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Tajawal', sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    img.logo {
-      width: 180px;
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-    }
-    form input, form button {
-      display: block;
-      margin: 10px auto;
-      padding: 12px;
-      width: 80%;
-      max-width: 400px;
-      border-radius: 10px;
-      border: none;
-      font-size: 1em;
-    }
-    form button {
-      background-color: #28a745;
-      color: white;
-      cursor: pointer;
-    }
-    .social-icons a {
-      color: white;
-      margin: 0 10px;
-      font-size: 1.5em;
-    }
-    #countdown {
-      font-size: 1.5em;
-      margin: 20px 0;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shamwebs Landing</title>
 </head>
 <body>
-  <img src="https://i.imgur.com/sU8YrRx.png" alt="شعار شام ويب" class="logo">
-  <h1>منصة شام ويب للتسوق الإلكتروني</h1>
-  <p>سجّل الآن للحصول على أولوية الوصول للعروض الحصرية!</p>  <div id="countdown"></div>  <form id="form" onsubmit="submitForm(); return false;">
-    <input type="text" id="name" placeholder="الاسم" required>
-    <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-    <input type="text" id="phone" placeholder="رقم الهاتف" required>
-    <button type="submit">تسجيل</button>
-  </form>  <div class="social-icons">
-    <a href="https://wa.me/" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://facebook.com/shamwebs" target="_blank"><i class="fab fa-facebook"></i></a>
-    <a href="mailto:info@shamwebs.com"><i class="fas fa-envelope"></i></a>
-  </div>  <!-- Firebase SDK -->  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js"></script>  <script>
+
+  <h1>مرحبا بك</h1>
+  <form id="form" onsubmit="event.preventDefault(); submitForm();">
+    <input type="text" id="name" placeholder="الاسم" required><br>
+    <input type="email" id="email" placeholder="البريد الإلكتروني" required><br>
+    <input type="tel" id="phone" placeholder="رقم الهاتف" required><br>
+    <button type="submit">إرسال</button>
+  </form>
+
+  <!-- Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyDrQFFSpBS8XGU4Fyqep8LKT5FlkRB025g",
+      authDomain: "shamwebs-landing.firebaseapp.com",
+      projectId: "shamwebs-landing",
+      storageBucket: "shamwebs-landing.appspot.com",
+      messagingSenderId: "938646034834",
+      appId: "1:938646034834:web:dd5cd87310e8926273894b",
+      measurementId: "G-T4GNRSV9MK"
     };
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
 
-    function submitForm() {
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const phone = document.getElementById("phone").value;
+    window.submitForm = async function () {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
 
-      db.collection("submissions").add({
-        name,
-        email,
-        phone,
-        timestamp: new Date()
-      })
-      .then(() => {
-        alert("تم التسجيل بنجاح ✅");
-        document.getElementById("form").reset();
-      })
-      .catch((error) => {
-        alert("حدث خطأ: " + error.message);
-      });
-    }
-
-    // Countdown Timer (60 days)
-    const countdown = () => {
-      const launchDate = new Date();
-      launchDate.setDate(launchDate.getDate() + 60);
-
-      const timer = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = launchDate - now;
-
-        if (distance < 0) {
-          clearInterval(timer);
-          document.getElementById("countdown").innerHTML = "انطلقت المنصة!";
-          return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown").innerHTML = `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
-      }, 1000);
+      try {
+        await addDoc(collection(db, "submissions"), {
+          name,
+          email,
+          phone,
+          timestamp: new Date()
+        });
+        alert("✅ تم التسجيل بنجاح");
+        document.getElementById('form').reset();
+      } catch (err) {
+        alert("❌ خطأ أثناء الإرسال: " + err.message);
+      }
     };
-
-    countdown();
-  </script></body>
+  </script>
+</body>
 </html>
