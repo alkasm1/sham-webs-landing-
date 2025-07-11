@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shamwebs Landing</title>
+  <title>Shamwebs - تسجيل</title>
 </head>
 <body>
-
-  <h1>مرحبا بك</h1>
+  <h1>سجل الآن</h1>
   <form id="form" onsubmit="event.preventDefault(); submitForm();">
     <input type="text" id="name" placeholder="الاسم" required><br>
     <input type="email" id="email" placeholder="البريد الإلكتروني" required><br>
@@ -15,10 +14,8 @@
     <button type="submit">إرسال</button>
   </form>
 
-  <!-- Firebase Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -32,13 +29,12 @@
     };
 
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
     const db = getFirestore(app);
 
     window.submitForm = async function () {
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
 
       try {
         await addDoc(collection(db, "submissions"), {
@@ -48,9 +44,9 @@
           timestamp: new Date()
         });
         alert("✅ تم التسجيل بنجاح");
-        document.getElementById('form').reset();
-      } catch (err) {
-        alert("❌ خطأ أثناء الإرسال: " + err.message);
+        document.getElementById("form").reset();
+      } catch (e) {
+        alert("❌ حدث خطأ أثناء التسجيل: " + e.message);
       }
     };
   </script>
