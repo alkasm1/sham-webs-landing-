@@ -1,69 +1,124 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!DOCTYPE html><html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>منصة شام ويب</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      font-family: 'Cairo', sans-serif;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Tajawal', sans-serif;
       text-align: center;
       padding: 20px;
-      background: #f0f0f0;
-      direction: rtl;
     }
-    h1 { color: #2c3e50; }
-    input, button {
-      padding: 10px;
-      margin: 10px;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    img.logo {
+      width: 180px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    form input, form button {
+      display: block;
+      margin: 10px auto;
+      padding: 12px;
       width: 80%;
       max-width: 400px;
-    }
-    button {
-      background: #28a745;
-      color: white;
+      border-radius: 10px;
       border: none;
+      font-size: 1em;
+    }
+    form button {
+      background-color: #28a745;
+      color: white;
       cursor: pointer;
     }
-    .success {
-      color: green;
-      margin-top: 15px;
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 1.5em;
+    }
+    #countdown {
+      font-size: 1.5em;
+      margin: 20px 0;
     }
   </style>
 </head>
 <body>
+  <img src="https://i.imgur.com/sU8YrRx.png" alt="شعار شام ويب" class="logo">
+  <h1>منصة شام ويب للتسوق الإلكتروني</h1>
+  <p>سجّل الآن للحصول على أولوية الوصول للعروض الحصرية!</p>  <div id="countdown"></div>  <form id="form" onsubmit="submitForm(); return false;">
+    <input type="text" id="name" placeholder="الاسم" required>
+    <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+    <input type="text" id="phone" placeholder="رقم الهاتف" required>
+    <button type="submit">تسجيل</button>
+  </form>  <div class="social-icons">
+    <a href="https://wa.me/" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://facebook.com/shamwebs" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="mailto:info@shamwebs.com"><i class="fas fa-envelope"></i></a>
+  </div>  <!-- Firebase SDK -->  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js"></script>  <script>
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
 
-  <h1>🚀 منصة شام ويب</h1>
-  <p>سجّل الآن لتكون من أوائل من يحصلون على عروضنا 💥</p>
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-  <form id="shamForm">
-    <input type="text" name="name" placeholder="الاسم" required />
-    <input type="email" name="email" placeholder="البريد الإلكتروني" required />
-    <input type="tel" name="phone" placeholder="رقم الهاتف" required />
-    <button type="submit">سجّل الآن</button>
-  </form>
+    function submitForm() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
 
-  <div id="successMessage" class="success" style="display:none;">✅ تم الإرسال بنجاح! شكرًا لتسجيلك.</div>
+      db.collection("submissions").add({
+        name,
+        email,
+        phone,
+        timestamp: new Date()
+      })
+      .then(() => {
+        alert("تم التسجيل بنجاح ✅");
+        document.getElementById("form").reset();
+      })
+      .catch((error) => {
+        alert("حدث خطأ: " + error.message);
+      });
+    }
 
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxexvzsiVEU7m0x8ye8V0TJNnb2SK-ppwPYWNAvJcbBp6e6TolO2nkJ3IwTJeFEVKh0Og/exec";
-    const form = document.getElementById('shamForm');
-    const successMessage = document.getElementById('successMessage');
+    // Countdown Timer (60 days)
+    const countdown = () => {
+      const launchDate = new Date();
+      launchDate.setDate(launchDate.getDate() + 60);
 
-    form.addEventListener('submit', e => {
-      e.preventDefault(); // منع إعادة تحميل الصفحة
-      const formData = new FormData(form);
-      fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response => {
-          successMessage.style.display = 'block';
-          form.reset();
-        })
-        .catch(error => alert('❌ حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقًا.'));
-    });
-  </script>
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = launchDate - now;
 
-</body>
+        if (distance < 0) {
+          clearInterval(timer);
+          document.getElementById("countdown").innerHTML = "انطلقت المنصة!";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+      }, 1000);
+    };
+
+    countdown();
+  </script></body>
 </html>
