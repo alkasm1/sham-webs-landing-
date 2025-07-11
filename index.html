@@ -1,120 +1,107 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sham Webs – قادمون</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منصة شام ويب</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      background-color: #000;
-      color: #fff;
       font-family: 'Arial', sans-serif;
       text-align: center;
-      padding: 40px 20px;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 2rem;
     }
-
     h1 {
-      font-size: 3em;
-      margin: 0.2em 0;
-      text-shadow: 2px 2px 5px #333;
+      color: #333;
     }
-
-    .logo {
-      margin-bottom: 20px;
+    p {
+      font-size: 1.1rem;
+      color: #555;
     }
-
-    .countdown {
-      font-size: 2em;
-      margin: 30px 0;
-      color: #0f0;
-    }
-
     form {
-      margin-top: 20px;
+      margin-top: 2rem;
     }
-
-    input {
-      padding: 10px;
-      margin: 10px;
-      width: 250px;
-      max-width: 90%;
-      border: none;
-      border-radius: 6px;
+    input, button {
+      padding: 0.8rem;
+      margin: 0.5rem;
+      width: 80%;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
-
     button {
-      padding: 12px 24px;
-      background-color: #e91e63;
+      background-color: #28a745;
+      color: white;
       border: none;
-      border-radius: 6px;
-      color: white;
       cursor: pointer;
-      font-size: 1em;
     }
-
-    .social-icons {
-      margin-top: 40px;
+    button:hover {
+      background-color: #218838;
     }
-
-    .social-icons a {
-      color: white;
+    #msg {
+      margin-top: 1rem;
+      color: green;
+    }
+    .countdown {
+      font-size: 2rem;
+      margin: 1.5rem 0;
+      color: #dc3545;
+    }
+    .social {
+      margin-top: 2rem;
+    }
+    .social a {
       margin: 0 10px;
-      font-size: 1.8em;
-      transition: 0.3s;
-    }
-
-    .social-icons a:hover {
-      color: #e91e63;
-    }
-
-    .whatsapp-share {
-      margin-top: 30px;
-    }
-
-    .whatsapp-share a {
-      display: inline-block;
-      background-color: #25D366;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 1em;
+      font-size: 1.5rem;
+      color: #333;
     }
   </style>
 </head>
 <body>
 
-  <div class="logo">
-    <img src="https://alkasm1.github.io/sham-webs-landing-/logo.png" alt="SHAM WEBS" style="max-width: 300px;">
-  </div>
-
-  <h1>قريبًا... منصة شام ويب 🔥</h1>
-  <p>سجّل لتكون أول من يصلك الجديد 🎁</p>
+  <h1>🚀 منصة شام ويب قادمة قريبًا!</h1>
+  <p>سجّل بياناتك للحصول على عروض الإطلاق الأولى 🔥</p>
 
   <div class="countdown" id="countdown"></div>
 
-  <form>
-    <input type="email" placeholder="البريد الإلكتروني" required><br>
-    <input type="tel" placeholder="رقم الهاتف" required><br>
+  <form name="submit-to-google-sheet">
+    <input type="text" name="name" placeholder="الاسم" required />
+    <input type="email" name="email" placeholder="البريد الإلكتروني" required />
+    <input type="tel" name="phone" placeholder="رقم الهاتف" required />
     <button type="submit">سجّل الآن</button>
+    <div id="msg"></div>
   </form>
 
-  <div class="whatsapp-share">
-    <a href="https://api.whatsapp.com/send?text=منصة%20شام%20ويب%20قادمة!%20🔥%20سجّل%20الآن%20عبر%20%0Ahttps%3A%2F%2Falkasm1.github.io%2Fsham-webs-landing-" target="_blank">
-      <i class="fab fa-whatsapp"></i> شارك على واتساب
-    </a>
-  </div>
-
-  <div class="social-icons">
-    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://wa.me" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <div class="social">
+    <a href="https://wa.me/yourwhatsapplink" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://facebook.com/shamwebs" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://t.me/yourchannel" target="_blank"><i class="fab fa-telegram"></i></a>
   </div>
 
   <script>
-    // عداد تنازلي يبدأ من 60 يومًا
-    const countdownEl = document.getElementById("countdown");
+    // Google Sheets form submission
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxexvzsiVEU7m0x8ye8V0TJNnb2SK-ppwPYWNAvJcbBp6e6TolO2nkJ3IwTJeFEVKh0Og/exec';
+    const form = document.forms['submit-to-google-sheet'];
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => {
+          msg.innerHTML = "✅ تم الإرسال بنجاح";
+          setTimeout(() => msg.innerHTML = "", 5000);
+          form.reset();
+        })
+        .catch(error => {
+          msg.innerHTML = "❌ حدث خطأ أثناء الإرسال";
+          console.error('Error!', error.message);
+        });
+    });
+
+    // Countdown logic
+    const countdown = document.getElementById("countdown");
     const launchDate = new Date();
     launchDate.setDate(launchDate.getDate() + 60);
 
@@ -122,21 +109,20 @@
       const now = new Date().getTime();
       const distance = launchDate - now;
 
-      if (distance < 0) {
-        countdownEl.innerHTML = "انطلقت المنصة!";
-        return;
-      }
-
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdownEl.innerHTML = `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+      countdown.innerHTML = `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        countdown.innerHTML = "✨ تم الإطلاق!";
+      }
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    const timer = setInterval(updateCountdown, 1000);
   </script>
 
 </body>
